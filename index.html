@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Student Marks Management System</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <div>
+        <p class="eyebrow">CLASSROOM HUB</p>
+        <h1>Student Marks<br>Management</h1>
+        <p class="subtitle">Your class performance, organised in one place.</p>
+      </div>
+      <div class="header-actions">
+        <button id="sample-btn" class="btn btn-light" type="button">Add sample data</button>
+        <button id="clear-btn" class="btn btn-ghost" type="button">Clear all</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="stats" aria-label="Class summary">
+      <article class="stat-card accent-navy">
+        <p>Students</p>
+        <strong id="stat-count">0</strong>
+        <span id="stat-count-note">No marks yet</span>
+      </article>
+      <article class="stat-card accent-blue">
+        <p>Total marks</p>
+        <strong id="stat-total">&mdash;</strong>
+        <span>added together</span>
+      </article>
+      <article class="stat-card accent-blue">
+        <p>Class average</p>
+        <strong id="stat-avg">&mdash;</strong>
+        <span>out of 100</span>
+      </article>
+      <article class="stat-card accent-green">
+        <p>Highest mark</p>
+        <strong id="stat-high">&mdash;</strong>
+        <span id="stat-high-name">&nbsp;</span>
+      </article>
+      <article class="stat-card accent-orange">
+        <p>Lowest mark</p>
+        <strong id="stat-low">&mdash;</strong>
+        <span id="stat-low-name">&nbsp;</span>
+      </article>
+    </section>
+
+    <section class="two-column">
+      <div class="panel">
+        <div class="panel-heading">
+          <h2 id="form-title">Add a student's mark</h2>
+          <p>Marks must be between 0 and 100. Leave the name empty to use "Student 1", "Student 2" and so on.</p>
+        </div>
+        <form id="mark-form" novalidate>
+          <div class="form-grid single">
+            <div class="field">
+              <label for="student-name">Student name <span>(optional)</span></label>
+              <input id="student-name" maxlength="80" placeholder="e.g. Ama Mensah" autocomplete="off">
+              <small class="error" id="error-name"></small>
+            </div>
+            <div class="field">
+              <label for="student-mark">Mark <span>/ 100</span></label>
+              <input id="student-mark" type="number" min="0" max="100" step="any" inputmode="decimal" placeholder="0 - 100">
+              <small class="error" id="error-mark"></small>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button id="save-btn" class="btn btn-primary" type="submit">Add mark</button>
+            <button id="cancel-btn" class="btn btn-quiet" type="button" hidden>Cancel edit</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="panel">
+        <div class="panel-heading">
+          <h2>Mark ranges</h2>
+          <p id="distribution-note">How many students fall in each range.</p>
+        </div>
+        <div id="distribution" class="distribution"></div>
+      </div>
+    </section>
+
+    <section class="panel table-panel">
+      <div class="table-toolbar">
+        <div class="panel-heading">
+          <h2>Student marks report</h2>
+          <p id="results-count">Showing 0 of 0 students</p>
+        </div>
+        <div class="toolbar-controls">
+          <div class="field">
+            <label for="search" class="sr-only">Search by name</label>
+            <input id="search" type="search" placeholder="Search by name" autocomplete="off">
+          </div>
+          <div class="field">
+            <label for="sort" class="sr-only">Sort students</label>
+            <select id="sort">
+              <option value="added">Order added</option>
+              <option value="name">Name (A-Z)</option>
+              <option value="mark-desc">Mark (high to low)</option>
+              <option value="mark-asc">Mark (low to high)</option>
+            </select>
+          </div>
+          <button id="download-btn" class="btn btn-light download" type="button">Export report</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>#</th><th>Student</th><th class="mark-cell">Mark</th><th class="actions-col">Actions</th></tr>
+          </thead>
+          <tbody id="mark-table"></tbody>
+          <tfoot id="mark-foot"></tfoot>
+        </table>
+      </div>
+      <div id="empty-state" class="empty-state" hidden>
+        <h3 id="empty-title">No marks yet</h3>
+        <p id="empty-text">Add a mark with the form above, or load a few sample marks to try it out.</p>
+      </div>
+      <p class="report-note">The downloaded report lists every student and the same totals shown above.</p>
+    </section>
+  </main>
+
+  <footer>Student Marks Management System &middot; Sample data is for demonstration only</footer>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
